@@ -5,7 +5,7 @@
 
     "builddrafts": false,
 
-    "baseurl": "http://gnarula.com",
+    "baseurl": "http://gnarula.github.io",
     "theme": "lanyon-hugo",
     "disqusShortname": "narula",
     "canonifyurls": true,
