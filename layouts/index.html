@@ -11,7 +11,10 @@
           {{ range $category := .Params.categories }} <a href="/categories/{{ $category | urlize }}">{{ $category }}</a> {{ end }}
           {{ end }}
         </span>
-        {{ .Content }}
+        {{ .Summary }}
+        {{ if .Truncated }}
+        <a href="{{ .Permalink }}">Read More...</a>
+        {{ end }}
     </div>
   {{ end }}
 </div>

@@ -1,0 +1,84 @@
++++
+date = "2016-04-10T13:02:17+05:30"
+title = "CSRF Attacks in a nutshell"
+categories = ["Security"]
++++
+
+Cross Site Request Forgery (CSRF) is something you might have come across if
+you're into web development. Even if you're not, its always good to have an
+idea about how you might be vulnerable to it.
+
+I've been working on GNOME Music and ownCloud's music app lately and a
+particular feature required exposing an [internal
+endpoint](https://github.com/owncloud/music/pull/485). This post is largely
+inspired by ownCloud's sophisticated design to prevent CSRF attacks.
+<!--more-->
+
+>In a CSRF attack, a malicious website attempts to impersonate your identity on
+a target website by sending requests on your behalf to its advantage.
+
+Imagine a  scenario where you're an active user of `vulnerablehost.com`, a
+music player which uses an endpoint like
+`http://vulnerablehost.com/add/music/?url=<url_to_file>` to enqueue music to
+the playlist. While relatively unharmful at first, what if you happen to visit
+another site `evilintents.com` which hides among other things, something as
+frivolous as
+
+```html
+<img src="http://vulnerablehost.com/add/music?url=<evil hosts music taste>">
+```
+
+Your browser would just pass on the request and append evilhost's music to
+your playlist. You might wonder if `vulnerablehost.com` could have made the endpoint
+accessible only via a POST request to circumvent the attack. The only problem
+is, crafty `evilintents.com` can probably fool you into submitting a form with
+the target pointing to the former
+
+```html
+<!-- On evilintents.com, a seemingly harmless form -->
+<form action="http://vulnerablehost.com/add/music" method="POST">
+    <label for="id">ID</label>
+    <input name="id" type="text">
+    <input type="submit">
+    <input type="hidden" name="url" value="<evil hosts music taste>">
+</form>
+```
+
+To understand the possible implications of the attack, reconsider
+`vulnerablehost.com` as your banking website with an endpoint to transfer funds
+to a benficiary.
+
+Prevention
+----------
+
+Fortunately, there is a way to prevent CSRF attacks on endpoints by requiring
+requests to contain data that only you, the client and the server would know
+and there is no way for `evilintents.com` to figure it out. This is often
+referred to as a CSRF token, which is hidden along with your POST request and
+enables `nonvulnerablehost.com` to ensure the requests are not send
+inadvertently.
+
+```html
+<!-- Forms on nonvulnerablehost.com -->
+<form action="http://nonvulnerablehost.com/add/music" method="POST">
+    <label for="url">URL:</label>
+    <input type="text" name="url">
+    <input type="hidden" name="csrftoken" value="randomvalueknownbyserver">
+</form>
+```
+
+In the above scenario, there is no way for `evilintents.com` to guess the value
+of `csrftoken` that is checked on every form submission at
+`nonvulnerablehost.com`, thereby rendering CSRF attacks useless :) Many
+web frameworks are bundled with CSRF Middlewares that do the check on every
+POST request automatically and mitigate the attack.
+
+Conclusion
+----------
+Theoretically, CSRF attacks are not hard to defend against, but practically
+developers often overlook
+[possible](http://pouyadarabi.blogspot.in/2015/04/bypass-facebook-csrf.html)
+[situations](https://bounty.github.com/classifications/cross-site-request-forgery.html).
+It's not hard to look around for possible CSRF vulnerabilities. While attacks
+are rarely in jest, if you're a BITSGian, logged in via Cyberoam,
+chances are you'll have to login again ;)

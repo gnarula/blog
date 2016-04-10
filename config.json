@@ -5,7 +5,7 @@
 
     "builddrafts": false,
 
-    "baseurl": "//gnarula.com",
+    "baseurl": "https://gnarula.com",
     "theme": "lanyon-hugo",
     "disqusShortname": "narula",
     "canonifyurls": true,
