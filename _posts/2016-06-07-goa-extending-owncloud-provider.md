@@ -1,8 +1,9 @@
-+++
-date = "2016-06-07T01:17:24+05:30"
-title = "GNOME Online Accounts: Extending the ownCloud Provider"
-categories = ["GNOME", "GSoC"]
-+++
+---
+layout: post
+date: "2016-06-07T01:17:24+05:30"
+title: "GNOME Online Accounts: Extending the ownCloud Provider"
+categories: ["GNOME", "GSoC"]
+---
 
 GNOME Online Accounts (GOA) has had support for ownCloud since quite some time. As a part of my project, I've been extending the ownCloud provider to add support for the Music feature.
 

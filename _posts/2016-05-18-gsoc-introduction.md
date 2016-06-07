@@ -1,8 +1,9 @@
-+++
-date = "2016-05-18T16:27:48+05:30"
-title = "GSoC 2016 Introduction"
-categories = ["GNOME", "GSoC"]
-+++
+---
+layout: post
+date: "2016-05-18T16:27:48+05:30"
+title: "GSoC 2016 Introduction"
+categories: ["GNOME", "GSoC"]
+---
 
 Hi everyone! My name's Gaurav Narula and I'm a third year undergrad student at [BITS Pilani K.K. Birla Goa Campus](http://www.bits-pilani.ac.in/Goa/). I'm pursuing a double major in Economics and Computer Science.
 

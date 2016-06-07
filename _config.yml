@@ -1,0 +1,28 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           /:categories/:title/
+#relative_permalinks: true
+
+# Setup
+title:               Gaurav's Blog
+tagline:             'Musings on Programming'
+description:         'Musings on Programming'
+url:                 https://gnarula.com
+baseurl:             ''
+paginate:            5
+gems:                ["jekyll-paginate"]
+
+# About/contact
+author:
+  name:              Gaurav Narula
+  url:               https://gnarula.com
+  email:             gnarula94@gmail.com
+
+# Custom vars
+github:              https://github.com/gnarula
+linkedin:            https://in.linkedin.com/in/gaurav-narula-b347747a
+facebook:            https://facebook.com/gnarula94
+
+excerpt_separator:   <!--more-->
+disqus:              narula
