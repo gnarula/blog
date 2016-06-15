@@ -16,7 +16,6 @@ gems:                ["jekyll-paginate"]
 # About/contact
 author:
   name:              Gaurav Narula
-  url:               https://gnarula.com
   email:             gnarula94@gmail.com
 
 # Custom vars
